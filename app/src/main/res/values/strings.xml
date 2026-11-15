@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">QuickKart</string>
+    <string name="quickkart_store_web_url">https://kumarraushan54989-ops.github.io/Raushan-mandal-/</string>
+    <string name="quickkart_apk_download_url">https://github.com/kumarraushan54989-ops/Raushan-mandal-/releases/latest/download/QuickKart-app.apk</string>
+</resources>

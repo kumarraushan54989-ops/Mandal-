@@ -1,0 +1,63 @@
+name: Build QuickKart Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Decode debug keystore
+        run: |
+          if [ -f debug.keystore.base64 ]; then
+            tr -d ' \n\r' < debug.keystore.base64 | base64 -d > debug.keystore
+          fi
+
+      - name: Set up Gradle 9.3.1
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.3.1'
+
+      - name: Build Debug APK
+        env:
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+        run: gradle :app:assembleDebug --no-daemon
+
+      - name: Upload QuickKart APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: QuickKart-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+
+      - name: Publish Direct APK Download Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cp app/build/outputs/apk/debug/app-debug.apk QuickKart-app.apk
+          if gh release view v1.0-latest >/dev/null 2>&1; then
+            gh release upload v1.0-latest QuickKart-app.apk --clobber
+          else
+            gh release create v1.0-latest QuickKart-app.apk \
+              --title "QuickKart Android App (Latest APK)" \
+              --notes "Tap QuickKart-app.apk below to download and install QuickKart on your Android phone." \
+              --latest
+          fi

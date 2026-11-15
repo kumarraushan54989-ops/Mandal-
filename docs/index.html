@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickKart — Shop &amp; Download Android App</title>
+  <style>
+    :root {
+      --blue: #2874f0;
+      --blue-dark: #1557c0;
+      --yellow: #ffe500;
+      --green: #16a34a;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+    header {
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      color: #fff;
+      padding: 20px 16px 28px;
+      text-align: center;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      box-shadow: 0 8px 24px rgba(21, 87, 192, 0.25);
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+    .badge {
+      display: inline-block;
+      margin-top: 8px;
+      background: var(--yellow);
+      color: #172337;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+    header p { margin-top: 10px; font-size: 14px; opacity: 0.92; max-width: 480px; margin-inline: auto; }
+    main { max-width: 540px; width: 100%; margin: -18px auto 32px; padding: 0 16px; flex: 1; }
+    .card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 4px 18px rgba(15, 23, 42, 0.08);
+      margin-bottom: 16px;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 15px 18px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.12s ease;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--blue); color: #fff; margin-bottom: 12px; }
+    .btn-apk { background: var(--green); color: #fff; margin-bottom: 10px; }
+    .btn-outline { background: #eff6ff; color: var(--blue-dark); border: 1px solid #bfdbfe; font-size: 14px; padding: 12px; }
+    h2 { font-size: 17px; margin-bottom: 10px; }
+    ul, ol { padding-left: 18px; color: var(--muted); font-size: 14px; line-height: 1.65; }
+    .link-box {
+      margin-top: 10px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: var(--muted);
+      word-break: break-all;
+    }
+    footer { text-align: center; padding: 16px; font-size: 12px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">QuickKart</div>
+    <br />
+    <span class="badge">ANDROID STORE &amp; DIRECT APK</span>
+    <p>Mobiles, electronics, fashion &amp; daily essentials with live seller updates and doorstep tracking.</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Open or Install QuickKart</h2>
+      <a class="btn btn-primary" href="intent://shop#Intent;scheme=quickkart;package=com.aistudio.quickkart.vxmpqr;end">
+        Open QuickKart App
+      </a>
+      <a class="btn btn-apk" href="https://github.com/kumarraushan54989-ops/Raushan-mandal-/releases/latest/download/QuickKart-app.apk">
+        Download Android APK (Direct)
+      </a>
+      <a class="btn btn-outline" href="https://github.com/kumarraushan54989-ops/Raushan-mandal-/releases">
+        View All App Releases on GitHub
+      </a>
+      <button id="fullscreenBtn" class="btn btn-outline" style="margin-top: 10px;" type="button" onclick="toggleFullScreen()">
+        View Page in Full Screen
+      </button>
+      <div class="link-box">
+        Direct App Deep Link: <strong>quickkart://shop</strong>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Phone par Install kaise karein</h2>
+      <ol>
+        <li>Upar <strong>Download Android APK</strong> button par tap karein.</li>
+        <li>Download hone ke baad <strong>QuickKart-app.apk</strong> file kholein.</li>
+        <li>Agar phone pooche toh <strong>Allow from this source</strong> on karke <strong>Install</strong> dabaa dein.</li>
+        <li>Install hote hi <strong>QuickKart</strong> aapke Home Screen par aa jaayega.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Store Highlights</h2>
+      <ul>
+        <li>Flipkart-style deals, cart, coupons &amp; wishlist</li>
+        <li>Google Maps pin delivery address &amp; live order tracking</li>
+        <li>Seller Studio se photo ke saath naye products upload karein</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>QuickKart Official Store Portal</footer>
+  <script>
+    function toggleFullScreen() {
+      var btn = document.getElementById('fullscreenBtn');
+      if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().then(function () {
+          btn.textContent = 'Exit Full Screen';
+        }).catch(function () {});
+      } else if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().then(function () {
+          btn.textContent = 'View Page in Full Screen';
+        }).catch(function () {});
+      }
+    }
+  </script>
+</body>
+</html>
